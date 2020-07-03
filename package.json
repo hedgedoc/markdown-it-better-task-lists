@@ -1,0 +1,43 @@
+{
+  "name": "@codimd/markdown-it-task-lists",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "eslintConfig": {
+    "parserOptions": {
+      "tsconfigRootDir": "",
+      "project": [
+        "./tsconfig.json"
+      ]
+    },
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "standard",
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/recommended-requiring-type-checking",
+      "plugin:import/recommended",
+      "plugin:import/typescript"
+    ]
+  },
+  "dependencies": {
+    "@types/markdown-it": "^10.0.1",
+    "markdown-it": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/punycode": "^2.1.0",
+    "punycode": "^2.1.1",
+    "typescript": "^3.9.6"
+  }
+}
