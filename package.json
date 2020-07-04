@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "postinstall": "tsc"
+    "postinstall": "yarn install; yarn build"
   },
   "keywords": [],
   "author": "",
