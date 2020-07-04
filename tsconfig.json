@@ -12,6 +12,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "isolatedModules": true,
-    "outDir": "dist/"
+    "esModuleInterop": true,
+    "outDir": "dist/",
+    "allowJs": true
   }
 }
