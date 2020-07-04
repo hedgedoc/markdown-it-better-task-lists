@@ -148,4 +148,47 @@ describe('markdown-it-task-lists', () => {
   it('only adds .contains-task-list to most immediate parent list', () => {
     expect(parsed.get('mixedNested')!!.querySelectorAll('ol:not(.contains-task-list) ul.contains-task-list').length).toBeGreaterThan(0)
   })
+
+  describe('when options.lineNumber is unset', () => {
+    it.each(Array.from(parsed))('%s: doesn\'t generate data-line attributes', (name, dom) => {
+      expect(dom.querySelectorAll('input.task-list-item-checkbox[data-line]').length).toBe(0)
+    })
+  })
+
+  describe('when options.lineNumber is false', () => {
+    const noLineNumberParser = new MarkdownIt().use(taskLists, { lineNumber: false })
+    it.each(Array.from(fixtures))('%s: doesn\'t generate data-line attributes', (name, mdDoc) => {
+      const dom = domParser.parseFromString(noLineNumberParser.render(mdDoc), 'text/html')
+      expect(dom.querySelectorAll('input.task-list-item-checkbox[data-line]').length).toBe(0)
+    })
+  })
+
+  describe('when options.lineNumber is true', () => {
+    const lineNumberParser = new MarkdownIt().use(taskLists, { lineNumber: true })
+
+    it.each(Array.from(fixtures))('%s: does generate data-line attributes', (name, mdDoc) => {
+      const dom = domParser.parseFromString(lineNumberParser.render(mdDoc), 'text/html')
+      expect(dom.querySelectorAll('input.task-list-item-checkbox[data-line]').length).toBeGreaterThan(0)
+    })
+
+    it.each(Array.from(fixtures))('%s: doesn\'t generate checkboxes without data-line attributes', (name, mdDoc) => {
+      const dom = domParser.parseFromString(lineNumberParser.render(mdDoc), 'text/html')
+      expect(dom.querySelectorAll('input.task-list-item-checkbox:not([data-line])').length).toBe(0)
+    })
+
+    describe.each(Array.from(fixtures))('%s the number in the data-line attribute', (name, mdDoc) => {
+      const dom = domParser.parseFromString(lineNumberParser.render(mdDoc), 'text/html')
+      const extracted: Array<[number, string]> = Array.from(dom.querySelectorAll('input.task-list-item-checkbox')).map(element => {
+        const lineNumber = Number.parseInt((element as HTMLElement).dataset.line!!)
+        const textAfter = (element as HTMLElement).nextSibling!!.textContent!!.trim()
+        return [lineNumber, textAfter]
+      })
+      const documentLines = mdDoc.split('\n')
+
+      it.each(extracted)(`${name}.md:%d: references the correct line in the markdown document`, (lineNumber: number, textAfter: string) => {
+        const line = documentLines[lineNumber].split(']')[1].trim()
+        expect(textAfter).toEqual(line)
+      })
+    })
+  })
 })

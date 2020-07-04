@@ -11,11 +11,12 @@ interface TaskListsOptions {
   enabled: boolean
   label: boolean
   labelAfter: boolean
+  lineNumber: boolean
 }
 
 export default function markdownItTaskLists (
   md: MarkdownIt,
-  options: TaskListsOptions = { enabled: false, label: false, labelAfter: false }
+  options: TaskListsOptions = { enabled: false, label: false, labelAfter: false, lineNumber: false }
 ): void {
   md.core.ruler.after('inline', 'github-task-lists', function (state: StateCore): boolean {
     const tokens = state.tokens
@@ -85,7 +86,7 @@ function todoify (token: Token, options: TaskListsOptions) {
 function makeCheckbox (token: Token, options: TaskListsOptions) {
   const checkbox = new Token('html_inline', '', 0)
   const disabledAttr = !options.enabled ? ' disabled="" ' : ''
-  const dataLine = token.map ? `data-line="${token.map[0]}"` : 'data-line=""'
+  const dataLine = options.lineNumber ? (token.map ? `data-line="${token.map[0]}"` : 'data-line=""') : ''
 
   if (token.content.indexOf('[ ] ') === 0) {
     checkbox.content = `<input class="task-list-item-checkbox" ${disabledAttr} type="checkbox" ${dataLine}">`
