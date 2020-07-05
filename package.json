@@ -1,13 +1,20 @@
 {
-  "name": "@codimd/markdown-it-task-lists",
-  "version": "1.0.0",
+  "name": "@truh/markdown-it-task-lists",
+  "version": "0.1.1",
   "description": "A markdown-it plugin to create GitHub-style task lists",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "LICENSE",
+    "package.json",
+    "Readme.md",
+    "dist/index.js",
+    "dist/index.d.ts"
+  ],
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "postinstall": "tsc"
+    "prepublish": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -37,8 +44,14 @@
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "testPathIgnorePatterns": ["/dist/"],
-    "moduleFileExtensions": ["ts", "tsx", "js"]
+    "testPathIgnorePatterns": [
+      "/dist/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   },
   "dependencies": {
     "@types/markdown-it": "^10.0.1",
