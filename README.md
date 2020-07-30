@@ -1,4 +1,4 @@
-# markdown-it-task-lists
+# markdown-it-better-task-lists
 
 Typescript port of [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists) markdown-it plugin for generating Github style task-lists.
 
