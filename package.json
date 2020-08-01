@@ -2,8 +2,6 @@
   "name": "@codimd/markdown-it-task-lists",
   "version": "0.0.1",
   "description": "A markdown-it plugin to create GitHub-style task lists",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "files": [
     "LICENSE",
     "package.json",
@@ -39,6 +37,7 @@
   "devDependencies": {
     "@types/jest": "26.0.3",
     "@types/punycode": "2.1.0",
+    "@typescript-eslint/eslint-plugin": "^3.7.1",
     "eslint": "5.9.0",
     "eslint-config-standard": "12.0.0",
     "eslint-plugin-import": "2.14.0",
