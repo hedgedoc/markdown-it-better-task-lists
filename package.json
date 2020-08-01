@@ -18,26 +18,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "eslintConfig": {
-    "parserOptions": {
-      "tsconfigRootDir": "",
-      "project": [
-        "./tsconfig.json"
-      ]
-    },
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "standard",
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      "plugin:import/recommended",
-      "plugin:import/typescript"
-    ]
-  },
   "jest": {
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
