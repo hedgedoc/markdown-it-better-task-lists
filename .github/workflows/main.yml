@@ -9,11 +9,23 @@ on:
       - master
 
 jobs:
-  Jest:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Run Tests
-        run: |
-          yarn install 
-          yarn test
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v1.1.0
+        with:
+          path: node_modules
+          key: node_modules
+      - name: Set up NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: yarn install
+      - name: Test Project
+        run: yarn test
+      - name: Build project
+        run: yarn build
