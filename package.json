@@ -38,9 +38,9 @@
   "devDependencies": {
     "@types/jest": "26.0.3",
     "@types/punycode": "2.1.0",
-    "@typescript-eslint/eslint-plugin": "^3.7.1",
-    "@typescript-eslint/parser": "^3.7.1",
-    "eslint": "^7.6.0",
+    "@typescript-eslint/eslint-plugin": "3.7.1",
+    "@typescript-eslint/parser": "3.7.1",
+    "eslint": "7.6.0",
     "jest": "26.1.0",
     "punycode": "2.1.1",
     "ts-jest": "26.1.1",
