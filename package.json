@@ -7,9 +7,8 @@
   "files": [
     "LICENSE",
     "package.json",
-    "Readme.md",
-    "dist/index.js",
-    "dist/index.d.ts"
+    "README.md",
+    "index.ts"
   ],
   "scripts": {
     "test": "jest",
