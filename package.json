@@ -1,5 +1,5 @@
 {
-  "name": "@codimd/markdown-it-task-lists",
+  "name": "@hedgedoc/markdown-it-task-lists",
   "version": "0.0.1",
   "description": "A markdown-it plugin to create GitHub-style task lists",
   "files": [
