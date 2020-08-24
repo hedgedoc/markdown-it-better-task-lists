@@ -48,5 +48,16 @@
     "punycode": "2.1.1",
     "ts-jest": "26.2.0",
     "typescript": "3.9.7"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codimd/markdown-it-better-task-lists.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codimd/markdown-it-better-task-lists/issues"
+  },
+  "homepage": "https://github.com/codimd/markdown-it-better-task-lists#readme"
 }
