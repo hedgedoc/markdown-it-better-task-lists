@@ -18,7 +18,7 @@ Use it the same as a normal markdown-it plugin:
 
 ```ts
 import MarkdownIt from 'markdown-it'
-import taskLists from '@codimd/markdown-it-task-lists'
+import taskLists from '@hedgedoc/markdown-it-task-lists'
 
 const parser = new MarkdownIt().use(taskLists)
 
