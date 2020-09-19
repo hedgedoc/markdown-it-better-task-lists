@@ -39,7 +39,7 @@
     "markdown-it": "^11.0.0"
   },
   "devDependencies": {
-    "@types/jest": "26.0.13",
+    "@types/jest": "26.0.14",
     "@types/punycode": "2.1.0",
     "@typescript-eslint/eslint-plugin": "4.1.0",
     "@typescript-eslint/parser": "4.1.0",
