@@ -1,5 +1,10 @@
+/*
+ * SPDX-FileCopyrightText: 2020 The HedgeDoc developers (see AUTHORS file)
+ *
+ * SPDX-License-Identifier: ISC
+ */
+
 import fs from 'fs'
-import jest from 'jest'
 import MarkdownIt from 'markdown-it/lib'
 import taskLists from '../index'
 

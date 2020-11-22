@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2020 The HedgeDoc developers (see AUTHORS file)
+
+SPDX-License-Identifier: CC0-1.0
+-->
+
 # markdown-it-better-task-lists
 
 Typescript port of [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists) markdown-it plugin for generating Github style task-lists.

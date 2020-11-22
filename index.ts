@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2020 The HedgeDoc developers (see AUTHORS file)
+ *
+ * SPDX-License-Identifier: ISC
+ */
+
 // Markdown-it plugin to render GitHub-style task lists; see
 //
 // https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments
