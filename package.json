@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "LICENSE",
+    "LICENSES/*",
     "package.json",
     "README.md",
     "dist/index.js",

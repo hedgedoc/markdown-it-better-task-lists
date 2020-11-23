@@ -1,0 +1,9 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: markdown-it-better-task-lists
+Upstream-Contact: The HedgeDoc developers <license@hedgedoc.org>
+Source: https://github.com/hedgedoc/markdown-it-better-task-lists
+
+Files: test/fixtures/*
+Copyright: 2020 The HedgeDoc developers (see AUTHORS file)
+License: CC-BY-SA-4.0
+
