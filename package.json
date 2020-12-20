@@ -1,6 +1,6 @@
 {
   "name": "@hedgedoc/markdown-it-task-lists",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A markdown-it plugin to create GitHub-style task lists",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
