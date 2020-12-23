@@ -117,7 +117,7 @@ describe('markdown-it-task-lists', () => {
     it.each(Array.from(fixtures))('%s: wraps and enables items', (name, mdDoc) => {
       const dom = domParser.parseFromString(enabledLabeledParser.render(mdDoc), 'text/html')
       expect(dom.querySelectorAll(
-        '.task-list-item > label > input[type=checkbox].task-list-item-checkbox:not([disabled])'
+        '.task-list-item > input[type=checkbox].task-list-item-checkbox:not([disabled]) + label'
       ).length).toBeGreaterThan(0)
     })
   })

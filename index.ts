@@ -33,7 +33,7 @@ export default function markdownItTaskLists (
     const id = token.attrGet("id")
     const line = token.attrGet("line")
     const idAttribute = `id="${id}"`
-    const dataLineAttribute = line ? `data-line="${line}"` : ''
+    const dataLineAttribute = line && options.lineNumber ? `data-line="${line}"` : ''
 
     return `<input class="task-list-item-checkbox" type="checkbox" ${checkedAttribute} ${disabledAttribute} ${dataLineAttribute} ${idAttribute}">`
   }
@@ -91,7 +91,7 @@ function todoify (token: Token, options: TaskListsOptions): void {
 
   const id = generateIdForToken(token)
 
-  token.children.splice(0, 0, createCheckboxToken(token, options, id))
+  token.children.splice(0, 0, createCheckboxToken(token, options.enabled, id))
   token.children[1].content = token.children[1].content.replace(checkboxRegex, '')
 
   if (options.label) {
@@ -108,14 +108,15 @@ function generateIdForToken (token: Token): string {
   }
 }
 
-function createCheckboxToken (token: Token, options: TaskListsOptions, id: string): Token {
+function createCheckboxToken (token: Token, enabled: boolean, id: string): Token {
   const checkbox = new Token('taskListItemCheckbox', '', 0)
-  if (!options.enabled) {
+  if (!enabled) {
     checkbox.attrSet("disabled", 'true')
   }
   if (token.map) {
     checkbox.attrSet("line", token.map[0].toString())
   }
+
   checkbox.attrSet("id", id)
 
   const checkboxRegexResult = checkboxRegex.exec(token.content)
