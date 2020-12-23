@@ -25,19 +25,25 @@ export default function markdownItTaskLists (
   options: TaskListsOptions = { enabled: false, label: false, labelAfter: false, lineNumber: false }
 ): void {
   md.core.ruler.after('inline', 'github-task-lists', function (state: StateCore): boolean {
-    const tokens = state.tokens
-    for (let i = 2; i < tokens.length; i++) {
-      if (isTodoItem(tokens, i)) {
-        todoify(tokens[i], options)
-        attrSet(tokens[i - 2], 'class', 'task-list-item' + (options.enabled ? ' enabled' : ''))
-        attrSet(tokens[parentToken(tokens, i - 2)], 'class', 'contains-task-list')
+    const allTokens = state.tokens
+    for (let i = 2; i < allTokens.length; i++) {
+      if (!isTodoItem(allTokens, i)) {
+        continue
+      }
+
+      todoify(allTokens[i], options)
+      setTokenAttribute(allTokens[i - 2], 'class', `task-list-item ${options.enabled ? ' enabled' : ''}`)
+
+      const parentToken = findParentToken(allTokens, i - 2)
+      if (parentToken) {
+        setTokenAttribute(parentToken, 'class', 'contains-task-list')
       }
     }
     return false
   })
 }
 
-function attrSet (token: Token, name: string, value: string) {
+function setTokenAttribute (token: Token, name: string, value: string) {
   const index = token.attrIndex(name)
   const attr: [string, string] = [name, value]
 
@@ -51,17 +57,17 @@ function attrSet (token: Token, name: string, value: string) {
   }
 }
 
-function parentToken (tokens: Token[], index: number) {
+function findParentToken (tokens: Token[], index: number): Token|undefined {
   const targetLevel = tokens[index].level - 1
-  for (let i = index - 1; i >= 0; i--) {
-    if (tokens[i].level === targetLevel) {
-      return i
+  for (let currentTokenIndex = index - 1; currentTokenIndex >= 0; currentTokenIndex--) {
+    if (tokens[currentTokenIndex].level === targetLevel) {
+      return tokens[currentTokenIndex]
     }
   }
-  return -1
+  return undefined
 }
 
-function isTodoItem (tokens: Token[], index: number) {
+function isTodoItem (tokens: Token[], index: number): boolean {
   return isInline(tokens[index]) &&
     isParagraph(tokens[index - 1]) &&
     isListItem(tokens[index - 2]) &&
