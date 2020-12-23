@@ -26,30 +26,30 @@ export default function markdownItTaskLists (
   options: TaskListsOptions = { enabled: false, label: false, lineNumber: false }
 ): void {
   md.core.ruler.after('inline', 'github-task-lists', (state) => processToken(state, options))
-  md.renderer.rules.taskListItemCheckbox = (tokens, idx) => {
+  md.renderer.rules.taskListItemCheckbox = (tokens) => {
     const token = tokens[0]
     const checkedAttribute = token.attrGet("checked") ? 'checked=""' : ''
-    const disabledAttribute = token.attrGet("disabled") ? 'disabled=""':''
+    const disabledAttribute = token.attrGet("disabled") ? 'disabled=""' : ''
     const id = token.attrGet("id")
     const line = token.attrGet("line")
     const idAttribute = `id="${id}"`
-    const dataLineAttribute = line ? `data-line="${line}"`:''
+    const dataLineAttribute = line ? `data-line="${line}"` : ''
 
     return `<input class="task-list-item-checkbox" type="checkbox" ${checkedAttribute} ${disabledAttribute} ${dataLineAttribute} ${idAttribute}">`
   }
 
   md.renderer.rules.taskListItemLabel_close = () => {
-      return '</label>'
+    return '</label>'
   }
 
   md.renderer.rules.taskListItemLabel_open = (tokens) => {
     const token = tokens[0]
     const id = token.attrGet('id')
-    return `<label for="${id}">`;
+    return `<label for="${id}">`
   }
 }
 
-function processToken(state: StateCore, options: TaskListsOptions): boolean {
+function processToken (state: StateCore, options: TaskListsOptions): boolean {
   const allTokens = state.tokens
   for (let i = 2; i < allTokens.length; i++) {
     if (!isTodoItem(allTokens, i)) {
@@ -67,7 +67,7 @@ function processToken(state: StateCore, options: TaskListsOptions): boolean {
   return false
 }
 
-function findParentToken (tokens: Token[], index: number): Token|undefined {
+function findParentToken (tokens: Token[], index: number): Token | undefined {
   const targetLevel = tokens[index].level - 1
   for (let currentTokenIndex = index - 1; currentTokenIndex >= 0; currentTokenIndex--) {
     if (tokens[currentTokenIndex].level === targetLevel) {
@@ -89,10 +89,10 @@ function todoify (token: Token, options: TaskListsOptions): void {
     return
   }
 
-  const id = generateIdForToken(token);
+  const id = generateIdForToken(token)
 
   token.children.splice(0, 0, createCheckboxToken(token, options, id))
-  token.children[1].content = token.children[1].content.replace(checkboxRegex, '');
+  token.children[1].content = token.children[1].content.replace(checkboxRegex, '')
 
   if (options.label) {
     token.children.splice(1, 0, createLabelBeginToken(id))
@@ -100,7 +100,7 @@ function todoify (token: Token, options: TaskListsOptions): void {
   }
 }
 
-function generateIdForToken(token: Token):string {
+function generateIdForToken (token: Token): string {
   if (token.map) {
     return `task-item-${token.map[0]}`
   } else {
@@ -108,7 +108,7 @@ function generateIdForToken(token: Token):string {
   }
 }
 
-function createCheckboxToken (token: Token, options: TaskListsOptions, id: string): Token{
+function createCheckboxToken (token: Token, options: TaskListsOptions, id: string): Token {
   const checkbox = new Token('taskListItemCheckbox', '', 0)
   if (!options.enabled) {
     checkbox.attrSet("disabled", 'true')
@@ -116,7 +116,7 @@ function createCheckboxToken (token: Token, options: TaskListsOptions, id: strin
   if (token.map) {
     checkbox.attrSet("line", token.map[0].toString())
   }
-  checkbox.attrSet("id", id);
+  checkbox.attrSet("id", id)
 
   const checkboxRegexResult = checkboxRegex.exec(token.content)
   const isChecked = !!checkboxRegexResult && checkboxRegexResult[1].toLowerCase() === 'x'
@@ -127,13 +127,13 @@ function createCheckboxToken (token: Token, options: TaskListsOptions, id: strin
   return checkbox
 }
 
-function createLabelBeginToken(id: string): Token {
+function createLabelBeginToken (id: string): Token {
   const labelBeginToken = new Token('taskListItemLabel_open', '', 1)
   labelBeginToken.attrSet('id', id)
   return labelBeginToken
 }
 
-function createLabelEndToken(): Token {
+function createLabelEndToken (): Token {
   return new Token('taskListItemLabel_close', '', -1)
 }
 
