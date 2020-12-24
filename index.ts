@@ -16,126 +16,140 @@ import Token from 'markdown-it/lib/token'
 interface TaskListsOptions {
   enabled: boolean
   label: boolean
-  labelAfter: boolean
   lineNumber: boolean
 }
 
+const checkboxRegex = /^ *\[([ x])\] /i
+
 export default function markdownItTaskLists (
   md: MarkdownIt,
-  options: TaskListsOptions = { enabled: false, label: false, labelAfter: false, lineNumber: false }
+  options: TaskListsOptions = { enabled: false, label: false, lineNumber: false }
 ): void {
-  md.core.ruler.after('inline', 'github-task-lists', function (state: StateCore): boolean {
-    const tokens = state.tokens
-    for (let i = 2; i < tokens.length; i++) {
-      if (isTodoItem(tokens, i)) {
-        todoify(tokens[i], options)
-        attrSet(tokens[i - 2], 'class', 'task-list-item' + (options.enabled ? ' enabled' : ''))
-        attrSet(tokens[parentToken(tokens, i - 2)], 'class', 'contains-task-list')
-      }
-    }
-    return false
-  })
-}
+  md.core.ruler.after('inline', 'github-task-lists', (state) => processToken(state, options))
+  md.renderer.rules.taskListItemCheckbox = (tokens) => {
+    const token = tokens[0]
+    const checkedAttribute = token.attrGet("checked") ? 'checked=""' : ''
+    const disabledAttribute = token.attrGet("disabled") ? 'disabled=""' : ''
+    const id = token.attrGet("id")
+    const line = token.attrGet("line")
+    const idAttribute = `id="${id}"`
+    const dataLineAttribute = line && options.lineNumber ? `data-line="${line}"` : ''
 
-function attrSet (token: Token, name: string, value: string) {
-  const index = token.attrIndex(name)
-  const attr: [string, string] = [name, value]
+    return `<input class="task-list-item-checkbox" type="checkbox" ${checkedAttribute} ${disabledAttribute} ${dataLineAttribute} ${idAttribute}">`
+  }
 
-  if (index < 0) {
-    token.attrPush(attr)
-  } else {
-    if (token.attrs == null) {
-      token.attrs = []
-    }
-    token.attrs[index] = attr
+  md.renderer.rules.taskListItemLabel_close = () => {
+    return '</label>'
+  }
+
+  md.renderer.rules.taskListItemLabel_open = (tokens) => {
+    const token = tokens[0]
+    const id = token.attrGet('id')
+    return `<label for="${id}">`
   }
 }
 
-function parentToken (tokens: Token[], index: number) {
+function processToken (state: StateCore, options: TaskListsOptions): boolean {
+  const allTokens = state.tokens
+  for (let i = 2; i < allTokens.length; i++) {
+    if (!isTodoItem(allTokens, i)) {
+      continue
+    }
+
+    todoify(allTokens[i], options)
+    allTokens[i - 2].attrJoin('class', `task-list-item ${options.enabled ? ' enabled' : ''}`)
+
+    const parentToken = findParentToken(allTokens, i - 2)
+    if (parentToken) {
+      parentToken.attrJoin('class', 'contains-task-list')
+    }
+  }
+  return false
+}
+
+function findParentToken (tokens: Token[], index: number): Token | undefined {
   const targetLevel = tokens[index].level - 1
-  for (let i = index - 1; i >= 0; i--) {
-    if (tokens[i].level === targetLevel) {
-      return i
+  for (let currentTokenIndex = index - 1; currentTokenIndex >= 0; currentTokenIndex--) {
+    if (tokens[currentTokenIndex].level === targetLevel) {
+      return tokens[currentTokenIndex]
     }
   }
-  return -1
+  return undefined
 }
 
-function isTodoItem (tokens: Token[], index: number) {
+function isTodoItem (tokens: Token[], index: number): boolean {
   return isInline(tokens[index]) &&
     isParagraph(tokens[index - 1]) &&
     isListItem(tokens[index - 2]) &&
     startsWithTodoMarkdown(tokens[index])
 }
 
-function todoify (token: Token, options: TaskListsOptions) {
-  if (token.children == null) return
-  token.children.unshift(makeCheckbox(token, options))
-  token.children[1].content = token.children[1].content.slice(3)
-  token.content = token.content.slice(3)
+function todoify (token: Token, options: TaskListsOptions): void {
+  if (token.children == null) {
+    return
+  }
+
+  const id = generateIdForToken(token)
+
+  token.children.splice(0, 0, createCheckboxToken(token, options.enabled, id))
+  token.children[1].content = token.children[1].content.replace(checkboxRegex, '')
 
   if (options.label) {
-    if (options.labelAfter) {
-      token.children.pop()
-
-      // Use large random number as id property of the checkbox.
-      const id = `task-item-${Math.ceil(Math.random() * (10000 * 1000) - 1000)}`
-      token.children[0].content = token.children[0].content.slice(0, -1) + ' id="' + id + '">'
-      token.children.push(afterLabel(token.content, id))
-    } else {
-      token.children.unshift(beginLabel())
-      token.children.push(endLabel())
-    }
+    token.children.splice(1, 0, createLabelBeginToken(id))
+    token.children.push(createLabelEndToken())
   }
 }
 
-function makeCheckbox (token: Token, options: TaskListsOptions) {
-  const checkbox = new Token('html_inline', '', 0)
-  const disabledAttr = !options.enabled ? ' disabled="" ' : ''
-  const dataLine = options.lineNumber ? (token.map ? `data-line="${token.map[0]}"` : 'data-line=""') : ''
-
-  if (token.content.indexOf('[ ] ') === 0) {
-    checkbox.content = `<input class="task-list-item-checkbox" ${disabledAttr} type="checkbox" ${dataLine}">`
-  } else if (token.content.indexOf('[x] ') === 0 || token.content.indexOf('[X] ') === 0) {
-    checkbox.content = `<input class="task-list-item-checkbox" checked="" ${disabledAttr} type="checkbox" ${dataLine}>`
+function generateIdForToken (token: Token): string {
+  if (token.map) {
+    return `task-item-${token.map[0]}`
+  } else {
+    return `task-item-${Math.ceil(Math.random() * (10000 * 1000) - 1000)}`
   }
+}
+
+function createCheckboxToken (token: Token, enabled: boolean, id: string): Token {
+  const checkbox = new Token('taskListItemCheckbox', '', 0)
+  if (!enabled) {
+    checkbox.attrSet("disabled", 'true')
+  }
+  if (token.map) {
+    checkbox.attrSet("line", token.map[0].toString())
+  }
+
+  checkbox.attrSet("id", id)
+
+  const checkboxRegexResult = checkboxRegex.exec(token.content)
+  const isChecked = !!checkboxRegexResult && checkboxRegexResult[1].toLowerCase() === 'x'
+  if (isChecked) {
+    checkbox.attrSet("checked", 'true')
+  }
+
   return checkbox
 }
 
-// these next two functions are kind of hacky; probably should really be a
-// true block-level token with .tag=='label'
-function beginLabel () {
-  const token = new Token('html_inline', '', 0)
-  token.content = '<label>'
-  return token
+function createLabelBeginToken (id: string): Token {
+  const labelBeginToken = new Token('taskListItemLabel_open', '', 1)
+  labelBeginToken.attrSet('id', id)
+  return labelBeginToken
 }
 
-function endLabel () {
-  const token = new Token('html_inline', '', 0)
-  token.content = '</label>'
-  return token
+function createLabelEndToken (): Token {
+  return new Token('taskListItemLabel_close', '', -1)
 }
 
-function afterLabel (content: string, id: string) {
-  const token = new Token('html_inline', '', 0)
-  token.content = `<label class="task-list-item-label" for="${id}">${content}</label>`
-  token.attrs = [['for', 'id']]
-  return token
-}
-
-function isInline (token: Token) {
+function isInline (token: Token): boolean {
   return token.type === 'inline'
 }
 
-function isParagraph (token: Token) {
+function isParagraph (token: Token): boolean {
   return token.type === 'paragraph_open'
 }
 
-function isListItem (token: Token) {
+function isListItem (token: Token): boolean {
   return token.type === 'list_item_open'
 }
 
-function startsWithTodoMarkdown (token: Token) {
-  // leading whitespace in a list item is already trimmed off by markdown-it
-  return token.content.indexOf('[ ] ') === 0 || token.content.indexOf('[x] ') === 0 || token.content.indexOf('[X] ') === 0
+function startsWithTodoMarkdown (token: Token): boolean {
+  return checkboxRegex.test(token.content)
 }
