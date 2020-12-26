@@ -1,7 +1,8 @@
 {
   "extends": [
     "config:base",
-    ":gitSignOff"
+    ":gitSignOff",
+    ":preserveSemverRanges"
   ],
   "labels": [
     "dependencies"
