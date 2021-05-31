@@ -31,9 +31,11 @@
       ]
     },
     {
-      "groupName": "JS test packages",
-      "packagePatterns": [
-        "^@testing-library/"
+      "groupName": "Jest",
+      "packageNames": [
+        "jest",
+        "ts-jest",
+        "@types/jest"
       ]
     }
   ],
