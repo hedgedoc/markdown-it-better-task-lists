@@ -26,13 +26,13 @@
     },
     {
       "groupName": "definitelyTyped",
-      "packagePatterns": [
+      "matchPackagePatterns": [
         "^@types/"
       ]
     },
     {
       "groupName": "Jest",
-      "packageNames": [
+      "matchPackageNames": [
         "jest",
         "ts-jest",
         "@types/jest"
