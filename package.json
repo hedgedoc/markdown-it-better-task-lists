@@ -35,16 +35,16 @@
     ]
   },
   "devDependencies": {
-    "markdown-it": "^12.0.0",
-    "@types/markdown-it": "^12.0.0",
     "@types/jest": "^26.0.0",
+    "@types/markdown-it": "^12.0.0",
     "@types/punycode": "^2.1.0",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
     "eslint": "^7.16.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.0",
+    "markdown-it": "^12.0.0",
     "punycode": "^2.1.1",
-    "ts-jest": "^26.4.4",
+    "ts-jest": "^27.0.0",
     "typescript": "^4.1.3"
   },
   "directories": {
@@ -57,5 +57,9 @@
   "bugs": {
     "url": "https://github.com/codimd/markdown-it-better-task-lists/issues"
   },
-  "homepage": "https://github.com/codimd/markdown-it-better-task-lists#readme"
+  "homepage": "https://github.com/codimd/markdown-it-better-task-lists#readme",
+  "dependencies": {
+    "@types/jsdom": "^16.2.10",
+    "jsdom": "^16.6.0"
+  }
 }
