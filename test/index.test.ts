@@ -7,6 +7,9 @@
 import fs from 'fs'
 import MarkdownIt from 'markdown-it/lib'
 import taskLists from '../index'
+import { JSDOM } from 'jsdom'
+
+const DOMParser = new JSDOM().window.DOMParser
 
 const files = new Map<string, string>(Object.entries({
   bullet: 'bullet.md',
@@ -112,7 +115,7 @@ describe('markdown-it-task-lists', () => {
     })
   })
 
-  describe('when options.enabled and options.label are true', () => {
+  describe('when options.enabledDOMParser and options.label are true', () => {
     const enabledLabeledParser = new MarkdownIt().use(taskLists, {enabled: true, label: true})
     it.each(Array.from(fixtures))('%s: wraps and enables items', (name, mdDoc) => {
       const dom = domParser.parseFromString(enabledLabeledParser.render(mdDoc), 'text/html')
