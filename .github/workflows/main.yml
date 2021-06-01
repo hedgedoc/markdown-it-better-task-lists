@@ -18,15 +18,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
       - name: Cache node_modules
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2
+        id: yarn-cache
         with:
-          path: node_modules
-          key: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-16-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Set up NodeJS
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 16
       - name: Install dependencies
         run: yarn install
       - name: Test Project
