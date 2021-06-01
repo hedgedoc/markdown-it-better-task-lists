@@ -2,7 +2,11 @@
   "extends": [
     "config:base",
     ":gitSignOff",
-    ":preserveSemverRanges"
+    ":preserveSemverRanges",
+    ":prHourlyLimitNone",
+    ":dependencyDashboard",
+    ":maintainLockFilesWeekly",
+    "schedule:daily"
   ],
   "labels": [
     "dependencies"
@@ -38,9 +42,5 @@
         "@types/jest"
       ]
     }
-  ],
-  "prHourlyLimit": 0,
-  "schedule": [
-    "on Saturday"
   ]
 }
