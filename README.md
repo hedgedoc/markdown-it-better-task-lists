@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC0-1.0
 
 # markdown-it-better-task-lists
 
-Typescript port of [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists) markdown-it plugin for generating Github style task-lists.
+This is a typescript port of [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists) markdown-it plugin for generating GitHub style task-lists.
 
 ## What it does
 
