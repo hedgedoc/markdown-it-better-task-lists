@@ -52,12 +52,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codimd/markdown-it-better-task-lists.git"
+    "url": "git+https://github.com/hedgedoc/markdown-it-better-task-lists.git"
   },
   "bugs": {
-    "url": "https://github.com/codimd/markdown-it-better-task-lists/issues"
+    "url": "https://github.com/hedgedoc/markdown-it-better-task-lists/issues"
   },
-  "homepage": "https://github.com/codimd/markdown-it-better-task-lists#readme",
+  "homepage": "https://github.com/hedgedoc/markdown-it-better-task-lists#readme",
   "dependencies": {
     "@types/jsdom": "^16.2.13",
     "jsdom": "^17.0.0"
