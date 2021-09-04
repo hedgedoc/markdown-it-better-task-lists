@@ -6,7 +6,7 @@
 
 import fs from 'fs'
 import MarkdownIt from 'markdown-it/lib'
-import taskLists from '../index'
+import taskLists from '../src'
 import { JSDOM } from 'jsdom'
 
 const DOMParser = new JSDOM().window.DOMParser
