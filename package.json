@@ -15,7 +15,7 @@
     "test": "jest",
     "build": "tsc",
     "prepublish": "tsc",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint --max-warnings=0 --ext .ts src"
   },
   "keywords": [],
   "author": "",
