@@ -6,3 +6,6 @@
 dist/
 node_modules/
 *.iml
+
+# yarn
+yarn.lock
