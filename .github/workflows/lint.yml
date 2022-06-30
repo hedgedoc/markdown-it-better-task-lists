@@ -39,3 +39,6 @@ jobs:
         run: yarn install --immutable
       - name: Lint code
         run: yarn lint
+
+      - name: Check code style
+        run: yarn format

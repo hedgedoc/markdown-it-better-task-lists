@@ -15,7 +15,9 @@
     "test": "jest",
     "build": "tsc",
     "prepublish": "tsc",
-    "lint": "eslint --max-warnings=0 --ext .ts src"
+    "lint": "eslint --max-warnings=0 --ext .ts src",
+    "format": "prettier -c \"{src,test}/**/*.{ts,tsx,js}\"",
+    "format:fix": "prettier -w \"{src,test}/**/*.{ts,tsx,js}\""
   },
   "keywords": [],
   "author": "",
@@ -45,6 +47,7 @@
     "jest": "^28.0.0",
     "jsdom": "^19.0.0",
     "markdown-it": "^13.0.0",
+    "prettier": "2.7.1",
     "punycode": "^2.1.1",
     "ts-jest": "^28.0.0",
     "typescript": "^4.4.2"
