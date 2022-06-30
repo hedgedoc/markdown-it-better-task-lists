@@ -59,5 +59,6 @@
   "bugs": {
     "url": "https://github.com/hedgedoc/markdown-it-better-task-lists/issues"
   },
-  "homepage": "https://github.com/hedgedoc/markdown-it-better-task-lists#readme"
+  "homepage": "https://github.com/hedgedoc/markdown-it-better-task-lists#readme",
+  "packageManager": "yarn@3.2.1"
 }

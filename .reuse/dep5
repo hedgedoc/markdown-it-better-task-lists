@@ -7,3 +7,6 @@ Files: test/fixtures/*
 Copyright: 2020 The HedgeDoc developers (see AUTHORS file)
 License: CC-BY-SA-4.0
 
+Files: .yarn/**
+Copyright: Yarn contributors
+License: LicenseRef-yarn
