@@ -15,7 +15,8 @@
     "test": "jest",
     "build": "tsc",
     "prepublish": "rm -rf dist && yarn lint && yarn build && yarn test",
-    "lint": "eslint --max-warnings=0 --ext .ts src"
+    "lint": "eslint --max-warnings=0 --ext .ts src",
+    "lint:fix": "eslint --fix --ext .ts src"
   },
   "keywords": [],
   "author": "",
