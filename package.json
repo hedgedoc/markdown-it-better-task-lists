@@ -14,10 +14,8 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "prepublish": "tsc",
-    "lint": "eslint --max-warnings=0 --ext .ts src",
-    "format": "prettier -c \"{src,test}/**/*.{ts,tsx,js}\"",
-    "format:fix": "prettier -w \"{src,test}/**/*.{ts,tsx,js}\""
+    "prepublish": "rm -rf dist && yarn lint && yarn build && yarn test",
+    "lint": "eslint --max-warnings=0 --ext .ts src"
   },
   "keywords": [],
   "author": "",
