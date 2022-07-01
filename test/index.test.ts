@@ -78,6 +78,11 @@ describe('markdown-it-task-lists', () => {
     expect(actuallyChecked).toBe(shouldBeChecked)
   })
 
+  it('input renders correctly', () => {
+    const strs = rendered.get('bullet')?.match(/<input\s([\w\-]+=\"[\w\s\-]{0,}"\s){0,}\/>/gm)
+    expect(strs?.length).toBe(4)
+  })
+
   describe('when option enabled is unset', () => {
     const dom = parsed.get('bullet')!!
     it('number of not disabled inputs is 0', () => {

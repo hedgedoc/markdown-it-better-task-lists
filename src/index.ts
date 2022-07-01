@@ -28,20 +28,20 @@ export default function markdownItTaskLists(
   md.core.ruler.after('inline', 'task-lists', (state) => processToken(state, options))
   md.renderer.rules.taskListItemCheckbox = (tokens) => {
     const token = tokens[0]
-    const checkedAttribute = token.attrGet('checked') ? 'checked=""' : ''
-    const disabledAttribute = token.attrGet('disabled') ? 'disabled=""' : ''
+    const checkedAttribute = token.attrGet('checked') ? 'checked="" ' : ''
+    const disabledAttribute = token.attrGet('disabled') ? 'disabled="" ' : ''
     const line = token.attrGet('line')
-    const idAttribute = `id="${token.attrGet('id')}"`
-    const dataLineAttribute = line && options.lineNumber ? `data-line="${line}"` : ''
+    const idAttribute = `id="${token.attrGet('id')}" `
+    const dataLineAttribute = line && options.lineNumber ? `data-line="${line}" ` : ''
 
-    return `<input class="task-list-item-checkbox" type="checkbox" ${checkedAttribute} ${disabledAttribute} ${dataLineAttribute} ${idAttribute}>`
+    return `<input class="task-list-item-checkbox" type="checkbox" ${checkedAttribute}${disabledAttribute}${dataLineAttribute}${idAttribute}/>`
   }
 
   md.renderer.rules.taskListItemLabel_close = () => {
     return '</label>'
   }
 
-  md.renderer.rules.taskListItemLabel_open = (tokens) => {
+  md.renderer.rules.taskListItemLabel_open = (tokens: Token[]) => {
     const token = tokens[0]
     const id = token.attrGet('id')
     return `<label for="${id}">`
