@@ -11,12 +11,14 @@ import { JSDOM } from 'jsdom'
 
 const DOMParser = new JSDOM().window.DOMParser
 
-const files = new Map<string, string>(Object.entries({
-  bullet: 'bullet.md',
-  ordered: 'ordered.md',
-  mixedNested: 'mixed-nested.md',
-  dirty: 'dirty.md'
-}))
+const files = new Map<string, string>(
+  Object.entries({
+    bullet: 'bullet.md',
+    ordered: 'ordered.md',
+    mixedNested: 'mixed-nested.md',
+    dirty: 'dirty.md'
+  })
+)
 
 describe('markdown-it-task-lists', () => {
   const fixtures = new Map<string, string>()
@@ -40,9 +42,12 @@ describe('markdown-it-task-lists', () => {
   beforeEach(setup)
 
   describe('compared to default markdown-it', () => {
-    it.each(Array.from(fixtures))('%s: renders tab-indented code differently than default markdown-it', (name, mdDoc) => {
-      expect(parserDefault.render(mdDoc)).not.toBe(mdParser.render(mdDoc))
-    })
+    it.each(Array.from(fixtures))(
+      '%s: renders tab-indented code differently than default markdown-it',
+      (name, mdDoc) => {
+        expect(parserDefault.render(mdDoc)).not.toBe(mdParser.render(mdDoc))
+      }
+    )
   })
 
   it('adds input.task-list-item-checkbox in items', () => {
@@ -50,24 +55,30 @@ describe('markdown-it-task-lists', () => {
   })
 
   it('renders [ ] as unchecked and [x] as unchecked inputs', () => {
-    expect(Array.from(parsed.get('ordered')!!.querySelectorAll('input[type=checkbox]')).map(
-      (element) => (element as HTMLInputElement).checked)
+    expect(
+      Array.from(parsed.get('ordered')!!.querySelectorAll('input[type=checkbox]')).map(
+        (element) => (element as HTMLInputElement).checked
+      )
     ).toEqual([true, false, true, false])
   })
 
   it('renders items marked up as [ ] as unchecked', () => {
     const shouldBeUnchecked = (fixtures.get('ordered')!!.match(/[\.\*\+-]\s+\[ \]/g) || []).length
-    const actuallyUnchecked = parsed.get('ordered')!!.querySelectorAll('input[type=checkbox].task-list-item-checkbox:not(:checked)').length
+    const actuallyUnchecked = parsed
+      .get('ordered')!!
+      .querySelectorAll('input[type=checkbox].task-list-item-checkbox:not(:checked)').length
     expect(actuallyUnchecked).toBe(shouldBeUnchecked)
   })
 
   it('renders items marked up as [x] as checked', () => {
     const shouldBeChecked = (fixtures.get('ordered')!!.match(/[\.\*\+-]\s+\[[Xx]\]/g) || []).length
-    const actuallyChecked = parsed.get('ordered')!!.querySelectorAll('input[type=checkbox].task-list-item-checkbox:checked').length
+    const actuallyChecked = parsed
+      .get('ordered')!!
+      .querySelectorAll('input[type=checkbox].task-list-item-checkbox:checked').length
     expect(actuallyChecked).toBe(shouldBeChecked)
   })
 
-  it.only('input renders correctly', () => {
+  it('input renders correctly', () => {
     const strs = rendered.get('bullet')?.match(/<input\s([\w\-]+=\"[\w\s\-]{0,}"\s){0,}\/>/gm)
     expect(strs?.length).toBe(4)
   })
@@ -103,7 +114,7 @@ describe('markdown-it-task-lists', () => {
   })
 
   describe('when options.label is false', () => {
-    const unlabeledParser = new MarkdownIt().use(taskLists, {  })
+    const unlabeledParser = new MarkdownIt().use(taskLists, {})
     it.each(Array.from(fixtures))('%s: does not render wrapping <label> elements', (name, mdDoc) => {
       //console.log(unlabeledParser.render(mdDoc))
       const dom = domParser.parseFromString(unlabeledParser.render(mdDoc), 'text/html')
@@ -113,7 +124,7 @@ describe('markdown-it-task-lists', () => {
 
   describe('when options.label is true', () => {
     const labeledParser = new MarkdownIt().use(taskLists, { label: true })
-    it.each(Array.from(fixtures))('%s: wraps the rendered list items\' contents in a <label>', (name, mdDoc) => {
+    it.each(Array.from(fixtures))("%s: wraps the rendered list items' contents in a <label>", (name, mdDoc) => {
       const dom = domParser.parseFromString(labeledParser.render(mdDoc), 'text/html')
       expect(dom.querySelectorAll('label').length).toBeGreaterThan(0)
       expect(dom.querySelectorAll('label').length).toBe(dom.querySelectorAll('input').length)
@@ -121,12 +132,13 @@ describe('markdown-it-task-lists', () => {
   })
 
   describe('when options.enabledDOMParser and options.label are true', () => {
-    const enabledLabeledParser = new MarkdownIt().use(taskLists, {enabled: true, label: true})
+    const enabledLabeledParser = new MarkdownIt().use(taskLists, { enabled: true, label: true })
     it.each(Array.from(fixtures))('%s: wraps and enables items', (name, mdDoc) => {
       const dom = domParser.parseFromString(enabledLabeledParser.render(mdDoc), 'text/html')
-      expect(dom.querySelectorAll(
-        '.task-list-item > input[type=checkbox].task-list-item-checkbox:not([disabled]) + label'
-      ).length).toBeGreaterThan(0)
+      expect(
+        dom.querySelectorAll('.task-list-item > input[type=checkbox].task-list-item-checkbox:not([disabled]) + label')
+          .length
+      ).toBeGreaterThan(0)
     })
   })
 
@@ -155,22 +167,26 @@ describe('markdown-it-task-lists', () => {
   })
 
   it('adds class .contains-task-list to lists', () => {
-    expect(parsed.get('bullet')!!.querySelectorAll('ol.contains-task-list, ul.contains-task-list').length).toBeGreaterThan(0)
+    expect(
+      parsed.get('bullet')!!.querySelectorAll('ol.contains-task-list, ul.contains-task-list').length
+    ).toBeGreaterThan(0)
   })
 
   it('only adds .contains-task-list to most immediate parent list', () => {
-    expect(parsed.get('mixedNested')!!.querySelectorAll('ol:not(.contains-task-list) ul.contains-task-list').length).toBeGreaterThan(0)
+    expect(
+      parsed.get('mixedNested')!!.querySelectorAll('ol:not(.contains-task-list) ul.contains-task-list').length
+    ).toBeGreaterThan(0)
   })
 
   describe('when options.lineNumber is unset', () => {
-    it.each(Array.from(parsed))('%s: doesn\'t generate data-line attributes', (name, dom) => {
+    it.each(Array.from(parsed))("%s: doesn't generate data-line attributes", (name, dom) => {
       expect(dom.querySelectorAll('input.task-list-item-checkbox[data-line]').length).toBe(0)
     })
   })
 
   describe('when options.lineNumber is false', () => {
     const noLineNumberParser = new MarkdownIt().use(taskLists, { lineNumber: false })
-    it.each(Array.from(fixtures))('%s: doesn\'t generate data-line attributes', (name, mdDoc) => {
+    it.each(Array.from(fixtures))("%s: doesn't generate data-line attributes", (name, mdDoc) => {
       const dom = domParser.parseFromString(noLineNumberParser.render(mdDoc), 'text/html')
       expect(dom.querySelectorAll('input.task-list-item-checkbox[data-line]').length).toBe(0)
     })
@@ -184,24 +200,29 @@ describe('markdown-it-task-lists', () => {
       expect(dom.querySelectorAll('input.task-list-item-checkbox[data-line]').length).toBeGreaterThan(0)
     })
 
-    it.each(Array.from(fixtures))('%s: doesn\'t generate checkboxes without data-line attributes', (name, mdDoc) => {
+    it.each(Array.from(fixtures))("%s: doesn't generate checkboxes without data-line attributes", (name, mdDoc) => {
       const dom = domParser.parseFromString(lineNumberParser.render(mdDoc), 'text/html')
       expect(dom.querySelectorAll('input.task-list-item-checkbox:not([data-line])').length).toBe(0)
     })
 
     describe.each(Array.from(fixtures))('%s the number in the data-line attribute', (name, mdDoc) => {
       const dom = domParser.parseFromString(lineNumberParser.render(mdDoc), 'text/html')
-      const extracted: Array<[number, string]> = Array.from(dom.querySelectorAll('input.task-list-item-checkbox')).map(element => {
-        const lineNumber = Number.parseInt((element as HTMLElement).dataset.line!!)
-        const textAfter = (element as HTMLElement).nextSibling!!.textContent!!.trim()
-        return [lineNumber, textAfter]
-      })
+      const extracted: Array<[number, string]> = Array.from(dom.querySelectorAll('input.task-list-item-checkbox')).map(
+        (element) => {
+          const lineNumber = Number.parseInt((element as HTMLElement).dataset.line!!)
+          const textAfter = (element as HTMLElement).nextSibling!!.textContent!!.trim()
+          return [lineNumber, textAfter]
+        }
+      )
       const documentLines = mdDoc.split('\n')
 
-      it.each(extracted)(`${name}.md:%d: references the correct line in the markdown document`, (lineNumber: number, textAfter: string) => {
-        const line = documentLines[lineNumber].split(']')[1].trim()
-        expect(textAfter).toEqual(line)
-      })
+      it.each(extracted)(
+        `${name}.md:%d: references the correct line in the markdown document`,
+        (lineNumber: number, textAfter: string) => {
+          const line = documentLines[lineNumber].split(']')[1].trim()
+          expect(textAfter).toEqual(line)
+        }
+      )
     })
   })
 })
