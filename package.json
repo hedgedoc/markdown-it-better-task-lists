@@ -13,44 +13,35 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "tsc",
-    "prepublish": "tsc",
+    "build": "tsc -p tsconfig.build.json",
+    "prepublish": "rm -rf dist && yarn lint && yarn build && yarn test",
     "lint": "eslint --max-warnings=0 --ext .ts src",
-    "format": "prettier -c \"{src,test}/**/*.{ts,tsx,js}\"",
-    "format:fix": "prettier -w \"{src,test}/**/*.{ts,tsx,js}\""
+    "lint:fix": "eslint --fix --ext .ts src"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "testPathIgnorePatterns": [
-      "/dist/"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ]
-  },
   "devDependencies": {
-    "@types/jest": "^28.0.0",
-    "@types/jsdom": "^16.2.13",
-    "@types/markdown-it": "^12.2.1",
-    "@types/punycode": "^2.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "eslint": "^8.0.0",
-    "jest": "^28.0.0",
-    "jsdom": "^19.0.0",
-    "markdown-it": "^13.0.0",
+    "@types/jest": "28.1.4",
+    "@types/jsdom": "16.2.14",
+    "@types/markdown-it": "12.2.3",
+    "@types/punycode": "2.1.0",
+    "@typescript-eslint/eslint-plugin": "5.30.3",
+    "@typescript-eslint/parser": "5.30.3",
+    "eslint": "8.18.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-jest": "26.5.3",
+    "eslint-plugin-prettier": "4.2.1",
+    "jest": "28.1.2",
+    "jsdom": "19.0.0",
+    "markdown-it": "13.0.1",
     "prettier": "2.7.1",
-    "punycode": "^2.1.1",
-    "ts-jest": "^28.0.0",
-    "typescript": "^4.4.2"
+    "punycode": "2.1.1",
+    "ts-jest": "28.0.5",
+    "typescript": "4.7.4"
+  },
+  "peerDependencies": {
+    "markdown-it": ">=12"
   },
   "directories": {
     "test": "test"
