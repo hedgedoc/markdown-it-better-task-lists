@@ -19,7 +19,7 @@ interface TaskListsOptions {
   lineNumber: boolean
 }
 
-const checkboxRegex = /^ *\[([ x])] /i
+const checkboxRegex = /^ *\[([\sx])] /i
 
 export default function markdownItTaskLists(
   md: MarkdownIt,
