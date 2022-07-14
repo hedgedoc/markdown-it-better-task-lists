@@ -11,6 +11,7 @@ import { JSDOM } from 'jsdom'
 import { Fixtures, loadFixtures } from './test-utils/fixtures/load-fixtures'
 
 const DOMParser = new JSDOM().window.DOMParser
+import { describe, expect, it } from '@jest/globals'
 
 describe('markdown-it-task-lists', () => {
   const taskListMarkdownParser = new MarkdownIt().use(taskLists)
