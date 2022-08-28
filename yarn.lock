@@ -436,7 +436,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hedgedoc/markdown-it-task-lists@workspace:."
   dependencies:
-    "@jest/types": 29.0.0
+    "@jest/types": 29.0.1
     "@mrdrogdrog/optional": 0.2.0
     "@types/jsdom": 20.0.0
     "@types/markdown-it": 12.2.3
@@ -731,9 +731,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:29.0.0, @jest/types@npm:^29.0.0":
-  version: 29.0.0
-  resolution: "@jest/types@npm:29.0.0"
+"@jest/types@npm:29.0.1":
+  version: 29.0.1
+  resolution: "@jest/types@npm:29.0.1"
   dependencies:
     "@jest/schemas": ^29.0.0
     "@types/istanbul-lib-coverage": ^2.0.0
@@ -741,7 +741,7 @@ __metadata:
     "@types/node": "*"
     "@types/yargs": ^17.0.8
     chalk: ^4.0.0
-  checksum: bd4512bfae26f475cf6da9f9d936440740d2a7ec7ed536365b27214bb60344428997e468f3e1b4a4d616332f705a12b94feba8e9a971152fafd8e5ed549ab8ab
+  checksum: 50a3658d69cad32fe270ef22e9a21cbad38c387d0b17cb1f23b144f9c9081e81623feda940b6b23459df656f88153ffe7765f36cd3bc3f3b2d8cd0ca246d75b2
   languageName: node
   linkType: hard
 
@@ -756,6 +756,20 @@ __metadata:
     "@types/yargs": ^17.0.8
     chalk: ^4.0.0
   checksum: 1e258d9c063fcf59ebc91e46d5ea5984674ac7ae6cae3e50aa780d22b4405bf2c925f40350bf30013839eb5d4b5e521d956ddf8f3b7c78debef0e75a07f57350
+  languageName: node
+  linkType: hard
+
+"@jest/types@npm:^29.0.0":
+  version: 29.0.0
+  resolution: "@jest/types@npm:29.0.0"
+  dependencies:
+    "@jest/schemas": ^29.0.0
+    "@types/istanbul-lib-coverage": ^2.0.0
+    "@types/istanbul-reports": ^3.0.0
+    "@types/node": "*"
+    "@types/yargs": ^17.0.8
+    chalk: ^4.0.0
+  checksum: bd4512bfae26f475cf6da9f9d936440740d2a7ec7ed536365b27214bb60344428997e468f3e1b4a4d616332f705a12b94feba8e9a971152fafd8e5ed549ab8ab
   languageName: node
   linkType: hard
 
