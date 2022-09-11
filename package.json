@@ -39,7 +39,7 @@
     "markdown-it": "13.0.1",
     "prettier": "2.7.1",
     "punycode": "2.1.1",
-    "ts-jest": "28.0.8",
+    "ts-jest": "29.0.0",
     "typescript": "4.8.2"
   },
   "peerDependencies": {
