@@ -436,7 +436,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hedgedoc/markdown-it-task-lists@workspace:."
   dependencies:
-    "@jest/types": 29.0.2
+    "@jest/types": 29.0.3
     "@mrdrogdrog/optional": 0.2.0
     "@types/jsdom": 20.0.0
     "@types/markdown-it": 12.2.3
@@ -729,35 +729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:29.0.2":
-  version: 29.0.2
-  resolution: "@jest/types@npm:29.0.2"
-  dependencies:
-    "@jest/schemas": ^29.0.0
-    "@types/istanbul-lib-coverage": ^2.0.0
-    "@types/istanbul-reports": ^3.0.0
-    "@types/node": "*"
-    "@types/yargs": ^17.0.8
-    chalk: ^4.0.0
-  checksum: f093f4548f8022f5ac9d1edf712edbb5c8edb101017f4afd95b9f9eb978328d099dcb77e2f1893a6dfeb9a7dfdd6cc589b2d83829490cee7e9afa9166c2945bd
-  languageName: node
-  linkType: hard
-
-"@jest/types@npm:^29.0.3":
-  version: 29.0.3
-  resolution: "@jest/types@npm:29.0.3"
-  dependencies:
-    "@jest/schemas": ^29.0.0
-    "@types/istanbul-lib-coverage": ^2.0.0
-    "@types/istanbul-reports": ^3.0.0
-    "@types/node": "*"
-    "@types/yargs": ^17.0.8
-    chalk: ^4.0.0
-  checksum: 3bd33e64d87a5421b860396ac7f7b9b8d5abbf0f300f4379bb20c8e3a6169fbbd078933ce0649827cd63e23330c4effeb6b222fa94e8dd0df638dfff6c1fed41
-  languageName: node
-  linkType: hard
-
-"@jest/types@npm:^29.0.3":
+"@jest/types@npm:29.0.3, @jest/types@npm:^29.0.3":
   version: 29.0.3
   resolution: "@jest/types@npm:29.0.3"
   dependencies:
@@ -3300,21 +3272,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-util@npm:^29.0.0":
-  version: 29.0.3
-  resolution: "jest-util@npm:29.0.3"
-  dependencies:
-    "@jest/types": ^29.0.3
-    "@types/node": "*"
-    chalk: ^4.0.0
-    ci-info: ^3.2.0
-    graceful-fs: ^4.2.9
-    picomatch: ^2.2.3
-  checksum: 39c31e75ba5bcb4c3ccdf0895f9fdbb83f839c432e7c6639a688beb414d681b5d50282da017c723ea1f2a7033e74a4938fd33dcff231c3e90f903173919991d5
-  languageName: node
-  linkType: hard
-
-"jest-util@npm:^29.0.3":
+"jest-util@npm:^29.0.0, jest-util@npm:^29.0.3":
   version: 29.0.3
   resolution: "jest-util@npm:29.0.3"
   dependencies:
