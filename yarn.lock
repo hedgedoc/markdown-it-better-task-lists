@@ -436,7 +436,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hedgedoc/markdown-it-task-lists@workspace:."
   dependencies:
-    "@jest/types": 29.0.3
+    "@jest/types": 29.1.0
     "@mrdrogdrog/optional": 0.2.0
     "@types/jsdom": 20.0.0
     "@types/markdown-it": 12.2.3
@@ -729,7 +729,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:29.0.3, @jest/types@npm:^29.0.3":
+"@jest/types@npm:29.1.0":
+  version: 29.1.0
+  resolution: "@jest/types@npm:29.1.0"
+  dependencies:
+    "@jest/schemas": ^29.0.0
+    "@types/istanbul-lib-coverage": ^2.0.0
+    "@types/istanbul-reports": ^3.0.0
+    "@types/node": "*"
+    "@types/yargs": ^17.0.8
+    chalk: ^4.0.0
+  checksum: 83e144a7587c9cb21d312a73d6c5244f9f5b24c293310e2b3e0c10ea4947936cd6f0c01b163f68177fdc7d8a8b5c730af78ad9f98a6e4734b0141848e69be44c
+  languageName: node
+  linkType: hard
+
+"@jest/types@npm:^29.0.3":
   version: 29.0.3
   resolution: "@jest/types@npm:29.0.3"
   dependencies:
