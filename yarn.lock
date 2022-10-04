@@ -729,7 +729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:29.1.2":
+"@jest/types@npm:29.1.2, @jest/types@npm:^29.1.2":
   version: 29.1.2
   resolution: "@jest/types@npm:29.1.2"
   dependencies:
@@ -754,20 +754,6 @@ __metadata:
     "@types/yargs": ^17.0.8
     chalk: ^4.0.0
   checksum: 3bd33e64d87a5421b860396ac7f7b9b8d5abbf0f300f4379bb20c8e3a6169fbbd078933ce0649827cd63e23330c4effeb6b222fa94e8dd0df638dfff6c1fed41
-  languageName: node
-  linkType: hard
-
-"@jest/types@npm:^29.1.2":
-  version: 29.1.2
-  resolution: "@jest/types@npm:29.1.2"
-  dependencies:
-    "@jest/schemas": ^29.0.0
-    "@types/istanbul-lib-coverage": ^2.0.0
-    "@types/istanbul-reports": ^3.0.0
-    "@types/node": "*"
-    "@types/yargs": ^17.0.8
-    chalk: ^4.0.0
-  checksum: 697fc72c37814606715fd1dcbdcb84129d8b292dc6d6d5fa9b8f2b7e8ffd297757b508913be049a4acfbe9f80b982d96e4aa9aa60c40bbc643274ca1867194f8
   languageName: node
   linkType: hard
 
