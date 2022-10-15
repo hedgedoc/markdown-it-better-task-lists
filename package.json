@@ -22,7 +22,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@jest/types": "29.1.2",
+    "@jest/types": "29.2.0",
     "@mrdrogdrog/optional": "0.2.0",
     "@types/jsdom": "20.0.0",
     "@types/markdown-it": "12.2.3",
