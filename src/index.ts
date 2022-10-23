@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 The HedgeDoc developers (see AUTHORS file)
+ * SPDX-FileCopyrightText: 2022 The HedgeDoc developers (see AUTHORS file)
  *
  * SPDX-License-Identifier: ISC
  */
@@ -10,8 +10,8 @@
 // https://github.com/blog/1825-task-lists-in-all-markdown-documents
 
 import MarkdownIt from 'markdown-it/lib'
-import StateCore from 'markdown-it/lib/rules_core/state_core'
-import Token from 'markdown-it/lib/token'
+import StateCore from 'markdown-it/lib/rules_core/state_core.js'
+import Token from 'markdown-it/lib/token.js'
 
 interface TaskListsOptions {
   enabled: boolean
