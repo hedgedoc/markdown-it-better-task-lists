@@ -7,7 +7,7 @@
 import { readFileSync } from 'fs'
 import { JSDOM } from 'jsdom'
 import MarkdownIt from 'markdown-it/lib'
-import taskLists from '../../index'
+import taskLists from '../../../src/index'
 
 enum FixtureFiles {
   bullet = 'bullet.md',
