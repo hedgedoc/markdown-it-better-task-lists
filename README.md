@@ -4,6 +4,10 @@ SPDX-FileCopyrightText: 2020 The HedgeDoc developers (see AUTHORS file)
 SPDX-License-Identifier: CC0-1.0
 -->
 
+# DEPRECATED
+
+Use https://github.com/hedgedoc/markdown-it-plugins instead
+
 # markdown-it-better-task-lists
 
 This is a typescript port of [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists) markdown-it plugin for generating GitHub style task-lists.
